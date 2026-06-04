@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@utility bg-auth {
+  background-image: url("/grafico.svg");
+  background-size: 30rem;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}

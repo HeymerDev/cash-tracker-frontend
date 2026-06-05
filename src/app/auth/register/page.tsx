@@ -1,5 +1,6 @@
 import { RegisterFrom } from "@/components/auth/forms/RegisterFrom";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "CashTracker - Registrar",
@@ -29,6 +30,12 @@ const RegisterPage = () => {
       </p>
 
       <RegisterFrom />
+
+      <nav className="mt-10 flex flex-col gap-4">
+        <Link href="/auth/login" className="text-center text-gray-500">
+          ¿Ya tienes una cuenta? Inicia sesión
+        </Link>
+      </nav>
     </>
   );
 };

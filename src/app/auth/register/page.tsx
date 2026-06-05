@@ -35,6 +35,13 @@ const RegisterPage = () => {
         <Link href="/auth/login" className="text-center text-gray-500">
           ¿Ya tienes una cuenta? Inicia sesión
         </Link>
+
+        <Link
+          href="/auth/forgot-password"
+          className="text-center text-gray-500"
+        >
+          ¿Olvidaste tu contraseña? Restablecela aquí
+        </Link>
       </nav>
     </>
   );

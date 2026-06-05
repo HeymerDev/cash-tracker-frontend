@@ -1,5 +1,6 @@
 import { LoginForm } from "@/components/auth/forms/LoginForm";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "CashTracker - Iniciar Sesión",
@@ -29,6 +30,19 @@ const LoginPage = () => {
       </p>
 
       <LoginForm />
+
+      <nav className="mt-10 flex flex-col gap-4">
+        <Link href="/auth/register" className="text-center text-gray-500">
+          ¿Aún no tienes una cuenta? Regístrate aquí
+        </Link>
+
+        <Link
+          href="/auth/forgot-password"
+          className="text-center text-gray-500"
+        >
+          ¿Olvidaste tu contraseña? Restablecela aquí
+        </Link>
+      </nav>
     </>
   );
 };

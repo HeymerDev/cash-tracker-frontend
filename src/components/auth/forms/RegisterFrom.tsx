@@ -1,8 +1,10 @@
 "use client";
 
+import { createAccount } from "@/actions/auth/register/create-account";
+
 export const RegisterFrom = () => {
   return (
-    <form className="mt-14 space-y-5" noValidate>
+    <form className="mt-14 space-y-5" noValidate action={createAccount}>
       <div className="flex flex-col gap-2">
         <label className="font-bold text-2xl" htmlFor="email">
           Email

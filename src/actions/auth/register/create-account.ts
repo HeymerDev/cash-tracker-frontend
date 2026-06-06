@@ -1,5 +1,7 @@
 "use server";
 
+import { RegisterSchema } from "@/schemas/auth";
+
 export const createAccount = async (formData: FormData) => {
   const registerData = {
     email: formData.get("email") as string,
@@ -7,4 +9,10 @@ export const createAccount = async (formData: FormData) => {
     password: formData.get("password") as string,
     password_confirmation: formData.get("password_confirmation") as string,
   };
+
+  const register = RegisterSchema.safeParse(registerData);
+
+  const errors = register.error?.issues.map((error) => error.message);
+
+  console.log(errors);
 };

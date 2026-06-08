@@ -12,7 +12,10 @@ export const createAccount = async (formData: FormData) => {
 
   const register = RegisterSchema.safeParse(registerData);
 
-  const errors = register.error?.issues.map((error) => error.message);
+  const errors = register.error?.issues.map((error) => ({
+    path: error.path[0],
+    message: error.message,
+  }));
 
   console.log(errors);
 };

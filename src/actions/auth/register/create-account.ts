@@ -17,5 +17,25 @@ export const createAccount = async (formData: FormData) => {
     message: error.message,
   }));
 
-  console.log(errors);
+  if (!register.success) return errors;
+
+  try {
+    const request = await fetch(`${process.env.API_URL}/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: register.data.email,
+        name: register.data.name,
+        password: register.data.password,
+      }),
+    });
+
+    const response = await request.json();
+
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 };

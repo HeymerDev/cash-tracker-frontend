@@ -1,8 +1,12 @@
 "use server";
 
 import { RegisterSchema } from "@/schemas/auth";
+import { RegisterState } from "@/types/auth/register";
 
-export const createAccount = async (formData: FormData) => {
+export const createAccount = async (
+  prevState: RegisterState,
+  formData: FormData,
+) => {
   const registerData = {
     email: formData.get("email") as string,
     name: formData.get("name") as string,
@@ -12,12 +16,14 @@ export const createAccount = async (formData: FormData) => {
 
   const register = RegisterSchema.safeParse(registerData);
 
-  const errors = register.error?.issues.map((error) => ({
-    path: error.path[0],
-    message: error.message,
-  }));
-
-  if (!register.success) return errors;
+  if (!register.success) {
+    return {
+      errors: register.error.issues.map((error) => ({
+        path: String(error.path[0]),
+        message: error.message,
+      })),
+    };
+  }
 
   try {
     const request = await fetch(`${process.env.API_URL}/auth/register`, {
@@ -34,8 +40,16 @@ export const createAccount = async (formData: FormData) => {
 
     const response = await request.json();
 
-    console.log(response);
+    return { errors: [], response };
   } catch (error) {
     console.log(error);
+    return {
+      errors: [
+        {
+          path: "server",
+          message: "Error interno del servidor",
+        },
+      ],
+    };
   }
 };

@@ -3,16 +3,12 @@
 import { useActionState } from "react";
 import { createAccount } from "@/actions/auth/register/create-account";
 import { ErrorMessage } from "../errors/ErrorMessage";
+import { hasError } from "@/utils";
 
 export const RegisterFrom = () => {
   const [state, dispatch] = useActionState(createAccount, {
     errors: [],
   });
-
-  const hasError = (field: string) =>
-    state.errors.some((error) => error.path === field);
-
-  console.log(state);
 
   return (
     <form className="mt-14 space-y-5" noValidate action={dispatch}>
@@ -25,7 +21,7 @@ export const RegisterFrom = () => {
           type="email"
           placeholder="Email de Registro"
           className={`w-full p-3 rounded-lg border ${
-            hasError("email")
+            hasError(state.errors, "name")
               ? "border-red-500 placeholder:text-red-500"
               : "border-gray-300"
           }`}
@@ -48,7 +44,7 @@ export const RegisterFrom = () => {
           type="name"
           placeholder="Nombre de Registro"
           className={`w-full p-3 rounded-lg border ${
-            hasError("name")
+            hasError(state.errors, "name")
               ? "border-red-500 placeholder:text-red-500"
               : "border-gray-300"
           }`}
@@ -71,7 +67,7 @@ export const RegisterFrom = () => {
           type="password"
           placeholder="Password de Registro"
           className={`w-full p-3 rounded-lg border ${
-            hasError("password")
+            hasError(state.errors, "password")
               ? "border-red-500 placeholder:text-red-500"
               : "border-gray-300"
           }`}
@@ -95,7 +91,7 @@ export const RegisterFrom = () => {
           type="password"
           placeholder="Repite Password de Registro"
           className={`w-full p-3 rounded-lg border ${
-            hasError("password_confirmation")
+            hasError(state.errors, "password_confirmation")
               ? "border-red-500 placeholder:text-red-500"
               : "border-gray-300"
           }`}

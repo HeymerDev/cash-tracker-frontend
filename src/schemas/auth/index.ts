@@ -11,4 +11,5 @@ export const RegisterSchema = z
   })
   .refine((data) => data.password === data.password_confirmation, {
     message: "Las contraseñas no coinciden",
+    path: ["password_confirmation"],
   });

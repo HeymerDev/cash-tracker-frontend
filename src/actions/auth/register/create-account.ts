@@ -46,11 +46,17 @@ export const createAccount = async (
 
     return {
       errors: prevState.errors,
+      status: request.status,
       response,
-      fields: {
-        email: "",
-        name: "",
-      },
+      fields: request.ok
+        ? {
+            email: "",
+            name: "",
+          }
+        : {
+            email: registerData.email,
+            name: registerData.name,
+          },
     };
   } catch (error) {
     console.log(error);

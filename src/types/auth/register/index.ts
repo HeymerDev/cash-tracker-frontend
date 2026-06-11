@@ -16,4 +16,5 @@ export type RegisterState = {
   errors: RegisterError[];
   fields: RegisterFields;
   response?: RegisterResponse;
+  status?: number;
 };

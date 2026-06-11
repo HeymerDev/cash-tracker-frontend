@@ -20,8 +20,12 @@ export const RegisterFrom = () => {
   useEffect(() => {
     if (!state.response) return;
 
-    toast.success(state.response.message);
-  }, [state.response]);
+    if (state.status === 201) {
+      toast.success(state.response.message);
+    } else {
+      toast.error(state.response.message);
+    }
+  }, [state.response, state.status]);
 
   return (
     <form className="mt-14 space-y-5" noValidate action={dispatch}>

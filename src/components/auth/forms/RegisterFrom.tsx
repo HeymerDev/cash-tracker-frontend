@@ -4,11 +4,17 @@ import { useActionState } from "react";
 import { createAccount } from "@/actions/auth/register/create-account";
 import { ErrorMessage } from "../errors/ErrorMessage";
 import { hasError } from "@/utils";
+import { RegisterState } from "@/types/auth/register";
 
 export const RegisterFrom = () => {
-  const [state, dispatch] = useActionState(createAccount, {
+  const initialState: RegisterState = {
     errors: [],
-  });
+    fields: {
+      email: "",
+      name: "",
+    },
+  };
+  const [state, dispatch] = useActionState(createAccount, initialState);
 
   return (
     <form className="mt-14 space-y-5" noValidate action={dispatch}>
@@ -26,6 +32,7 @@ export const RegisterFrom = () => {
               : "border-gray-300"
           }`}
           name="email"
+          defaultValue={state.fields.email}
         />
 
         {state.errors
@@ -49,6 +56,7 @@ export const RegisterFrom = () => {
               : "border-gray-300"
           }`}
           name="name"
+          defaultValue={state.fields.name}
         />
 
         {state.errors

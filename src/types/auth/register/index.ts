@@ -3,6 +3,12 @@ export type RegisterError = {
   message: string;
 };
 
+export type RegisterFields = {
+  email: string;
+  name: string;
+};
+
 export type RegisterState = {
   errors: RegisterError[];
+  fields: RegisterFields;
 };

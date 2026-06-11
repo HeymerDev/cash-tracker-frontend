@@ -22,6 +22,10 @@ export const createAccount = async (
         path: String(error.path[0]),
         message: error.message,
       })),
+      fields: {
+        email: registerData.email,
+        name: registerData.name,
+      },
     };
   }
 
@@ -40,7 +44,16 @@ export const createAccount = async (
 
     const response = await request.json();
 
-    return { errors: [], response };
+    return {
+      errors: [],
+      response,
+      fields: {
+        email: "",
+        name: "",
+        password: "",
+        password_confirmation: "",
+      },
+    };
   } catch (error) {
     console.log(error);
     return {
@@ -50,6 +63,7 @@ export const createAccount = async (
           message: "Error interno del servidor",
         },
       ],
+      fields: registerData,
     };
   }
 };

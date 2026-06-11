@@ -1,10 +1,11 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { createAccount } from "@/actions/auth/register/create-account";
 import { ErrorMessage } from "../errors/ErrorMessage";
 import { hasError } from "@/utils";
 import { RegisterState } from "@/types/auth/register";
+import { toast } from "sonner";
 
 export const RegisterFrom = () => {
   const initialState: RegisterState = {
@@ -15,6 +16,12 @@ export const RegisterFrom = () => {
     },
   };
   const [state, dispatch] = useActionState(createAccount, initialState);
+
+  useEffect(() => {
+    if (!state.response) return;
+
+    toast.success(state.response.message);
+  }, [state.response]);
 
   return (
     <form className="mt-14 space-y-5" noValidate action={dispatch}>

@@ -45,7 +45,7 @@ export const createAccount = async (
     const response: RegisterResponse = await request.json();
 
     return {
-      errors: [],
+      errors: prevState.errors,
       response,
       fields: {
         email: "",

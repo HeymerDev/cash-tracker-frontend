@@ -15,7 +15,5 @@ export type RegisterFields = {
 export type RegisterState = {
   errors: RegisterError[];
   fields: RegisterFields;
-  response?: {
-    message: string;
-  };
+  response?: RegisterResponse;
 };

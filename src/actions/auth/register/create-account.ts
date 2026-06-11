@@ -61,12 +61,7 @@ export const createAccount = async (
   } catch (error) {
     console.log(error);
     return {
-      errors: [
-        {
-          path: "server",
-          message: "Error interno del servidor",
-        },
-      ],
+      errors: prevState.errors,
       fields: registerData,
     };
   }

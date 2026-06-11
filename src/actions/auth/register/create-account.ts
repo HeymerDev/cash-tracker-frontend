@@ -1,7 +1,7 @@
 "use server";
 
 import { RegisterSchema } from "@/schemas/auth";
-import { RegisterState } from "@/types/auth/register";
+import { RegisterResponse, RegisterState } from "@/types/auth/register";
 
 export const createAccount = async (
   prevState: RegisterState,
@@ -42,7 +42,7 @@ export const createAccount = async (
       }),
     });
 
-    const response = await request.json();
+    const response: RegisterResponse = await request.json();
 
     return {
       errors: [],
@@ -50,8 +50,6 @@ export const createAccount = async (
       fields: {
         email: "",
         name: "",
-        password: "",
-        password_confirmation: "",
       },
     };
   } catch (error) {

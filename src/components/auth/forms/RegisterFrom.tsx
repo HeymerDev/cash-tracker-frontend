@@ -27,7 +27,7 @@ export const RegisterFrom = () => {
           type="email"
           placeholder="Email de Registro"
           className={`w-full p-3 rounded-lg border ${
-            hasError(state.errors, "name")
+            hasError(state.errors, "email")
               ? "border-red-500 placeholder:text-red-500"
               : "border-gray-300"
           }`}

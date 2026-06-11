@@ -3,6 +3,10 @@ export type RegisterError = {
   message: string;
 };
 
+export type RegisterResponse = {
+  message: string;
+};
+
 export type RegisterFields = {
   email: string;
   name: string;
@@ -11,4 +15,7 @@ export type RegisterFields = {
 export type RegisterState = {
   errors: RegisterError[];
   fields: RegisterFields;
+  response?: {
+    message: string;
+  };
 };

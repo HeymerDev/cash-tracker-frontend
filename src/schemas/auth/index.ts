@@ -13,3 +13,7 @@ export const RegisterSchema = z
     message: "Las contraseñas no coinciden",
     path: ["password_confirmation"],
   });
+
+export const ResponseRegisterSchema = z.object({
+  message: z.string(),
+});

@@ -19,5 +19,5 @@ export const ResponseRegisterSchema = z.object({
 });
 
 export const verifyEmailSchema = z.object({
-  token: z.string().min(6, "El token debe tener al menos 6 caracteres"),
+  token: z.string().length(6, "Token inválido"),
 });

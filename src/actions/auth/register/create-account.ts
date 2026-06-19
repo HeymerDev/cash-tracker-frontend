@@ -1,6 +1,6 @@
 "use server";
 
-import { RegisterSchema, ResponseRegisterSchema } from "@/schemas/auth";
+import { RegisterSchema, ResponseSchema } from "@/schemas/auth";
 import { RegisterResponse, RegisterState } from "@/types/auth/register";
 
 export const createAccount = async (
@@ -43,7 +43,7 @@ export const createAccount = async (
     });
 
     const json: RegisterResponse = await request.json();
-    const response = ResponseRegisterSchema.parse(json);
+    const response = ResponseSchema.parse(json);
 
     return {
       errors: prevState.errors,

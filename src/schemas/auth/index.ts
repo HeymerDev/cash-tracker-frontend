@@ -14,7 +14,7 @@ export const RegisterSchema = z
     path: ["password_confirmation"],
   });
 
-export const ResponseRegisterSchema = z.object({
+export const ResponseSchema = z.object({
   message: z.string(),
 });
 

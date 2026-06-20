@@ -42,7 +42,9 @@ export const verifyEmail = async (
     };
   } catch (error) {
     return {
-      errors: Array(confirmToken.error),
+      errors: [
+        error instanceof Error ? error.message : "Ocurrió un error inesperado",
+      ],
       success: "",
     };
   }

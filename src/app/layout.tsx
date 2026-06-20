@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en" className={`${outfit.className} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         {children}
-        <Toaster richColors />
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );

@@ -2,7 +2,8 @@
 
 import { verifyEmail } from "@/actions/auth/verify-email/verify-email";
 import { PinInput, PinInputField } from "@chakra-ui/pin-input";
-import { useActionState, useState, startTransition } from "react";
+import { useActionState, useState, startTransition, useEffect } from "react";
+import { toast } from "sonner";
 
 export const OTPConfirmAccount = () => {
   const [token, setToken] = useState("");
@@ -12,6 +13,16 @@ export const OTPConfirmAccount = () => {
     errors: [],
     success: "",
   });
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success(state.success);
+    }
+
+    state.errors.forEach((error) => {
+      toast.error(error);
+    });
+  }, [state.success, state.errors]);
 
   const handleChange = (token: string) => {
     setToken(token);

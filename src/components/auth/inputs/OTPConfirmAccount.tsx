@@ -12,7 +12,7 @@ export const OTPConfirmAccount = () => {
   const [token, setToken] = useState("");
 
   const verifyEmailAction = verifyEmail.bind(null, token);
-  const [state, dispatch] = useActionState(verifyEmailAction, {
+  const [state, dispatch, isPending] = useActionState(verifyEmailAction, {
     errors: [],
     success: "",
   });
@@ -63,8 +63,9 @@ export const OTPConfirmAccount = () => {
       <button
         className="bg-purple-950 hover:bg-purple-800 w-full p-3 rounded-lg text-white font-black  text-xl cursor-pointer"
         onClick={handleVerify}
+        disabled={isPending}
       >
-        Confirmar Cuenta
+        {isPending ? "Verificando..." : "Confirmar Cuenta"}
       </button>
     </div>
   );

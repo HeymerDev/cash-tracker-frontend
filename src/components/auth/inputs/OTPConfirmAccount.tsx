@@ -2,10 +2,13 @@
 
 import { verifyEmail } from "@/actions/auth/verify-email/verify-email";
 import { PinInput, PinInputField } from "@chakra-ui/pin-input";
+import { useRouter } from "next/navigation";
 import { useActionState, useState, startTransition, useEffect } from "react";
 import { toast } from "sonner";
 
 export const OTPConfirmAccount = () => {
+  const router = useRouter();
+
   const [token, setToken] = useState("");
 
   const verifyEmailAction = verifyEmail.bind(null, token);
@@ -16,7 +19,14 @@ export const OTPConfirmAccount = () => {
 
   useEffect(() => {
     if (state.success) {
-      toast.success(state.success);
+      toast.success(state.success, {
+        onDismiss: () => {
+          router.push("/auth/login");
+        },
+        onAutoClose: () => {
+          router.push("/auth/login");
+        },
+      });
       queueMicrotask(() => {
         setToken("");
       });
@@ -25,9 +35,7 @@ export const OTPConfirmAccount = () => {
     state.errors.forEach((error) => {
       toast.error(error);
     });
-  }, [state.success, state.errors]);
-
-  console.log("render", token, state.success);
+  }, [state.success, state.errors, router]);
 
   const handleChange = (token: string) => {
     setToken(token);

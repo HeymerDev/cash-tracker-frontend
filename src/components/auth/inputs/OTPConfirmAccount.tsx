@@ -17,12 +17,17 @@ export const OTPConfirmAccount = () => {
   useEffect(() => {
     if (state.success) {
       toast.success(state.success);
+      queueMicrotask(() => {
+        setToken("");
+      });
     }
 
     state.errors.forEach((error) => {
       toast.error(error);
     });
   }, [state.success, state.errors]);
+
+  console.log("render", token, state.success);
 
   const handleChange = (token: string) => {
     setToken(token);

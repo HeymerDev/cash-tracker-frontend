@@ -1,9 +1,19 @@
 "use client";
 
+import { login } from "@/actions/auth/login/login";
+import { useActionState, useEffect } from "react";
+
 export const LoginForm = () => {
+  const [state, dispatch] = useActionState(login, {
+    errors: [],
+  });
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
   return (
     <>
-      <form className="mt-14 space-y-5" noValidate>
+      <form action={dispatch} className="mt-14 space-y-5" noValidate>
         <div className="flex flex-col gap-2">
           <label className="font-bold text-2xl">Email</label>
 

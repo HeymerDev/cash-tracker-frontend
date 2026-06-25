@@ -2,40 +2,33 @@
 
 import { login } from "@/actions/auth/login/login";
 import { useActionState, useEffect } from "react";
+import { FormField } from "../inputs/FormField";
 
 export const LoginForm = () => {
   const [state, dispatch] = useActionState(login, {
     errors: [],
+    fields: { email: "" },
   });
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
   return (
     <>
       <form action={dispatch} className="mt-14 space-y-5" noValidate>
-        <div className="flex flex-col gap-2">
-          <label className="font-bold text-2xl">Email</label>
+        <FormField
+          label="Email"
+          name="email"
+          type="email"
+          placeholder="Ingresa tu email"
+          errors={state.errors}
+          defaultValue={state.fields.email}
+        />
 
-          <input
-            id="email"
-            type="email"
-            placeholder="Email de Registro"
-            className="w-full border border-gray-300 p-3 rounded-lg"
-            name="email"
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label className="font-bold text-2xl">Password</label>
-
-          <input
-            type="password"
-            placeholder="Password de Registro"
-            className="w-full border border-gray-300 p-3 rounded-lg"
-            name="password"
-          />
-        </div>
+        <FormField
+          label="Password"
+          name="password"
+          type="password"
+          placeholder="Ingresa tu password"
+          errors={state.errors}
+        />
 
         <input
           type="submit"

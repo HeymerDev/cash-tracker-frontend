@@ -1,7 +1,7 @@
 "use server";
 
-import { LoginSchema } from "@/schemas/auth";
-import { LoginState } from "@/types/auth/login";
+import { LoginSchema, ResponseSchema } from "@/schemas/auth";
+import { LoginResponse, LoginState } from "@/types/auth/login";
 
 export const login = async (prevState: LoginState, formData: FormData) => {
   const loginData = {
@@ -23,8 +23,32 @@ export const login = async (prevState: LoginState, formData: FormData) => {
     };
   }
 
-  return {
-    errors: [],
-    fields: { email: "" },
-  };
+  try {
+    const request = await fetch(`${process.env.API_URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: auth.data.email,
+        password: auth.data.password,
+      }),
+    });
+
+    const json: LoginResponse = await request.json();
+    const response = ResponseSchema.parse(json);
+
+    return {
+      errors: [],
+      fields: { email: "" },
+      response,
+      status: request.status,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      errors: prevState.errors,
+      fields: loginData,
+    };
+  }
 };

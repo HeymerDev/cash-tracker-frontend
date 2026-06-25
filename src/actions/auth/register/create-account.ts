@@ -46,7 +46,7 @@ export const createAccount = async (
     const response = ResponseSchema.parse(json);
 
     return {
-      errors: prevState.errors,
+      errors: [],
       status: request.status,
       response,
       fields: request.ok

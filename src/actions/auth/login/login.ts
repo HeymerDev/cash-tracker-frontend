@@ -1,11 +1,12 @@
 "use server";
 
 import { LoginSchema } from "@/schemas/auth";
+import { LoginState } from "@/types/auth/login";
 
-export const login = async (prevState: unknown, formData: FormData) => {
+export const login = async (prevState: LoginState, formData: FormData) => {
   const loginData = {
-    email: formData.get("email"),
-    password: formData.get("password"),
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
   };
 
   const auth = LoginSchema.safeParse(loginData);
@@ -16,8 +17,14 @@ export const login = async (prevState: unknown, formData: FormData) => {
         path: String(error.path[0]),
         message: error.message,
       })),
+      fields: {
+        email: loginData.email,
+      },
     };
   }
 
-  console.log(loginData);
+  return {
+    errors: [],
+    fields: { email: "" },
+  };
 };

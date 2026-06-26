@@ -40,7 +40,13 @@ export const login = async (prevState: LoginState, formData: FormData) => {
 
     return {
       errors: [],
-      fields: { email: "" },
+      fields: request.ok
+        ? {
+            email: "",
+          }
+        : {
+            email: loginData.email,
+          },
       response,
       status: request.status,
     };

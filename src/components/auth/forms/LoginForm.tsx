@@ -3,12 +3,23 @@
 import { login } from "@/actions/auth/login/login";
 import { useActionState, useEffect } from "react";
 import { FormField } from "../inputs/FormField";
+import { toast } from "sonner";
 
 export const LoginForm = () => {
   const [state, dispatch] = useActionState(login, {
     errors: [],
     fields: { email: "" },
   });
+
+  useEffect(() => {
+    if (!state.response) return;
+
+    if (state.status === 200) {
+      toast.success(state.response.message);
+    } else {
+      toast.error(state.response.message);
+    }
+  }, [state.response, state.status]);
 
   return (
     <>

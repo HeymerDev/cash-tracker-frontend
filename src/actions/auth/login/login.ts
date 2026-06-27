@@ -1,6 +1,6 @@
 "use server";
 
-import { LoginSchema, ResponseSchema } from "@/schemas/auth";
+import { LoginResponseSchema, LoginSchema } from "@/schemas/auth";
 import { LoginResponse, LoginState } from "@/types/auth/login";
 
 export const login = async (prevState: LoginState, formData: FormData) => {
@@ -36,7 +36,7 @@ export const login = async (prevState: LoginState, formData: FormData) => {
     });
 
     const json: LoginResponse = await request.json();
-    const response = ResponseSchema.parse(json);
+    const response = LoginResponseSchema.parse(json);
 
     return {
       errors: [],

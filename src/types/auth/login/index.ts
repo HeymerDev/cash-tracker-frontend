@@ -15,6 +15,6 @@ export type LoginFields = {
 export type LoginState = {
   errors: LoginError[];
   fields: LoginFields;
-  response?: LoginResponse;
+  response?: string;
   status?: number;
 };

@@ -47,7 +47,7 @@ export const login = async (prevState: LoginState, formData: FormData) => {
         : {
             email: loginData.email,
           },
-      response,
+      response: response.message,
       status: request.status,
     };
   } catch (error) {

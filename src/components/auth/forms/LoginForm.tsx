@@ -15,11 +15,11 @@ export const LoginForm = () => {
     if (!state.response) return;
 
     if (state.status === 200) {
-      toast.success(state.response.message);
+      toast.success(state.response);
     } else if (state.status === 403) {
-      toast.warning(state.response.message);
+      toast.warning(state.response);
     } else {
-      toast.error(state.response.message);
+      toast.error(state.response);
     }
   }, [state.response, state.status]);
 

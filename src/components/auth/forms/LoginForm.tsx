@@ -16,6 +16,8 @@ export const LoginForm = () => {
 
     if (state.status === 200) {
       toast.success(state.response.message);
+    } else if (state.status === 403) {
+      toast.warning(state.response.message);
     } else {
       toast.error(state.response.message);
     }

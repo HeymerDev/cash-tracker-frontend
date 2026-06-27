@@ -19,6 +19,11 @@ export const LoginSchema = z.object({
   password: z.string().min(1, { message: "El Password no puede ir vacio" }),
 });
 
+export const LoginResponseSchema = z.object({
+  message: z.string(),
+  token: z.string().optional(),
+});
+
 export const ResponseSchema = z.object({
   message: z.string(),
 });

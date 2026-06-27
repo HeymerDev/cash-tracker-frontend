@@ -3,6 +3,8 @@
 import { LoginResponseSchema, LoginSchema } from "@/schemas/auth";
 import { LoginResponse, LoginState } from "@/types/auth/login";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 export const login = async (prevState: LoginState, formData: FormData) => {
   const cookieStore = await cookies();
@@ -42,12 +44,15 @@ export const login = async (prevState: LoginState, formData: FormData) => {
     const response = LoginResponseSchema.parse(json);
 
     if (response.token) {
+      console.log(response);
       cookieStore.set({
         name: "CASHTRACKER_TOKEN",
         value: response.token,
         httpOnly: true,
         path: "/",
       });
+
+      redirect("/admin");
     }
 
     return {
@@ -63,10 +68,19 @@ export const login = async (prevState: LoginState, formData: FormData) => {
       status: request.status,
     };
   } catch (error) {
-    console.log(error);
+    if (isRedirectError(error)) {
+      throw error;
+    }
+
+    console.error(error);
+
     return {
-      errors: prevState.errors,
-      fields: loginData,
+      errors: [],
+      fields: {
+        email: loginData.email,
+      },
+      response: "Error interno del servidor",
+      status: 500,
     };
   }
 };

@@ -1,4 +1,5 @@
 import { Logo } from "@/components/logo/Logo";
+import { verifySession } from "@/dal/auth";
 import Link from "next/link";
 
 export default async function AdminLayout({
@@ -6,6 +7,7 @@ export default async function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await verifySession();
   return (
     <>
       <header className="bg-purple-950 py-5">

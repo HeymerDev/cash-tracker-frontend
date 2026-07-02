@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const page = () => {
+const page = async () => {
   return (
     <div className="flex flex-col-reverse md:flex-row md:justify-between items-center">
       <div className="w-full md:w-auto">

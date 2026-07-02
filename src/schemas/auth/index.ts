@@ -31,3 +31,9 @@ export const ResponseSchema = z.object({
 export const VerifyEmailSchema = z.object({
   token: z.string().length(6, "Token inválido"),
 });
+
+export const UserSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  email: z.email(),
+});

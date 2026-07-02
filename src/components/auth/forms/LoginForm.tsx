@@ -21,7 +21,7 @@ export const LoginForm = () => {
     } else {
       toast.error(state.response);
     }
-  }, [state.response, state.status]);
+  }, [state]);
 
   return (
     <>

@@ -31,5 +31,6 @@ export const verifySession = cache(async () => {
     };
   } catch (error) {
     console.error(error);
+    redirect("/auth/login");
   }
 });

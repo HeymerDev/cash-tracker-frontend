@@ -44,12 +44,12 @@ export const login = async (prevState: LoginState, formData: FormData) => {
     const response = LoginResponseSchema.parse(json);
 
     if (response.token) {
-      console.log(response);
       cookieStore.set({
         name: "CASHTRACKER_TOKEN",
         value: response.token,
         httpOnly: true,
         path: "/",
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // 7 days
       });
 
       redirect("/admin");

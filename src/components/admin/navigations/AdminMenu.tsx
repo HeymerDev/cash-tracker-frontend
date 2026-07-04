@@ -10,6 +10,7 @@ import {
 import { Bars3Icon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { User } from "@/types/admin";
+import { logout } from "@/actions/auth/logout/logout";
 
 interface AdminMenuProps {
   user: User;
@@ -44,9 +45,11 @@ export default function AdminMenu({ user }: AdminMenuProps) {
               Mis Presupuestos
             </Link>
             <button
-              className="block p-2 hover:text-purple-950"
+              className="block p-2 hover:text-purple-950 cursor-pointer"
               type="button"
-              onClick={() => {}}
+              onClick={async () => {
+                await logout();
+              }}
             >
               Cerrar Sesión
             </button>

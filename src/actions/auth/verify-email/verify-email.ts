@@ -10,7 +10,6 @@ export const verifyEmail = async (
   const confirmToken = VerifyEmailSchema.safeParse({ token });
 
   if (!confirmToken.success) {
-    console.log(confirmToken.error.issues.map((error) => error.message));
     return {
       errors: confirmToken.error.issues.map((error) => error.message),
       success: "",

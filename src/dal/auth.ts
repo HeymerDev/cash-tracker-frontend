@@ -1,7 +1,9 @@
+import "server-only";
 import { cache } from "react";
 import { UserSchema } from "@/schemas/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 export const verifySession = cache(async () => {
   const cookieStore = await cookies();
@@ -30,6 +32,9 @@ export const verifySession = cache(async () => {
       isAuth: true,
     };
   } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
     console.error(error);
     redirect("/auth/login");
   }

@@ -1,8 +1,27 @@
 "use client";
 
+import { forgotPassword } from "@/actions/auth/forgot-password/forgot-password";
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
+
 export const ForgotPasswordForm = () => {
+  const [state, dispatch] = useActionState(forgotPassword, {
+    errors: [],
+    message: "",
+  });
+
+  useEffect(() => {
+    if (state.errors.length > 0) {
+      state.errors.forEach((error) => {
+        toast.error(error, {
+          description: "Por favor, verifica los datos ingresados.",
+        });
+      });
+    }
+  }, [state]);
+
   return (
-    <form className=" mt-14 space-y-5" noValidate>
+    <form className=" mt-14 space-y-5" noValidate action={dispatch}>
       <div className="flex flex-col gap-2 mb-10">
         <label className="font-bold text-2xl">Email</label>
 

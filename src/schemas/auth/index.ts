@@ -32,6 +32,10 @@ export const VerifyEmailSchema = z.object({
   token: z.string().length(6, "Token inválido"),
 });
 
+export const ForgotPasswordSchema = z.object({
+  email: z.email({ message: "Email no válido" }),
+});
+
 export const UserSchema = z.object({
   id: z.number(),
   name: z.string(),

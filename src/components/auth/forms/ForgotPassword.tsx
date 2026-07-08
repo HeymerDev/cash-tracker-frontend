@@ -18,6 +18,12 @@ export const ForgotPasswordForm = () => {
         });
       });
     }
+
+    if (state.message) {
+      toast.success(state.message, {
+        description: "Por favor, revisa tu correo electrónico.",
+      });
+    }
   }, [state]);
 
   return (

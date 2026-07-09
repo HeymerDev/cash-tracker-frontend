@@ -3,7 +3,13 @@
 import { verifyEmail } from "@/actions/auth/verify-email/verify-email";
 import { PinInput, PinInputField } from "@chakra-ui/pin-input";
 import { useRouter } from "next/navigation";
-import { useActionState, useState, startTransition, useEffect } from "react";
+import {
+  useActionState,
+  useState,
+  startTransition,
+  useEffect,
+  useMemo,
+} from "react";
 import { toast } from "sonner";
 
 export const OTPConfirmAccount = () => {
@@ -11,7 +17,10 @@ export const OTPConfirmAccount = () => {
 
   const [token, setToken] = useState("");
 
-  const verifyEmailAction = verifyEmail.bind(null, token);
+  const verifyEmailAction = useMemo(
+    () => verifyEmail.bind(null, token),
+    [token],
+  );
   const [state, dispatch, isPending] = useActionState(verifyEmailAction, {
     errors: [],
     success: "",

@@ -28,7 +28,7 @@ export const ResponseSchema = z.object({
   message: z.string(),
 });
 
-export const VerifyEmailSchema = z.object({
+export const TokenSchema = z.object({
   token: z.string().length(6, "Token inválido"),
 });
 

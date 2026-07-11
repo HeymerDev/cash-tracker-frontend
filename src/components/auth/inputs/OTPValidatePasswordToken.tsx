@@ -2,7 +2,16 @@
 
 import { validateTokenPassword } from "@/actions/auth/new-password/validate-token-password";
 import { PinInput, PinInputField } from "@chakra-ui/pin-input";
-import { startTransition, useActionState, useMemo, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  startTransition,
+  useActionState,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { toast } from "sonner";
 
 export const OTPValidatePasswordToken = () => {
   const [token, setToken] = useState<string>("");
@@ -16,6 +25,18 @@ export const OTPValidatePasswordToken = () => {
     errors: [],
     message: "",
   });
+
+  useEffect(() => {
+    if (state.message) {
+      toast.success(state.message, {
+        description: "Puedes asignar una nueva contraseña ahora",
+      });
+    }
+
+    state.errors.forEach((error) => {
+      toast.error(error);
+    });
+  }, [state]);
 
   const handleChange = (token: string) => {
     setToken(token);

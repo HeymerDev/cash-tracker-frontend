@@ -1,13 +1,13 @@
 "use server";
 
-import { ResponseSchema, VerifyEmailSchema } from "@/schemas/auth";
+import { ResponseSchema, TokenSchema } from "@/schemas/auth";
 import { VerifyEmailState } from "@/types/auth/verify-email";
 
 export const verifyEmail = async (
   token: string,
   prevState: VerifyEmailState,
 ) => {
-  const confirmToken = VerifyEmailSchema.safeParse({ token });
+  const confirmToken = TokenSchema.safeParse({ token });
 
   if (!confirmToken.success) {
     return {

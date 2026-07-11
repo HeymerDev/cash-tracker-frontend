@@ -13,7 +13,11 @@ import {
 } from "react";
 import { toast } from "sonner";
 
-export const OTPValidatePasswordToken = () => {
+interface Props {
+  setIsValidToken: Dispatch<SetStateAction<boolean>>;
+}
+
+export const OTPValidatePasswordToken = ({ setIsValidToken }: Props) => {
   const [token, setToken] = useState<string>("");
 
   const validateTokenAction = useMemo(
@@ -31,12 +35,14 @@ export const OTPValidatePasswordToken = () => {
       toast.success(state.message, {
         description: "Puedes asignar una nueva contraseña ahora",
       });
+
+      setIsValidToken(true);
     }
 
     state.errors.forEach((error) => {
       toast.error(error);
     });
-  }, [state]);
+  }, [state, setIsValidToken]);
 
   const handleChange = (token: string) => {
     setToken(token);

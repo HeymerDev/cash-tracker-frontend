@@ -7,6 +7,12 @@ import { OTPValidatePasswordToken } from "../inputs/OTPValidatePasswordToken";
 export const ResetPasswordHandler = () => {
   const [isValidToken, setIsValidToken] = useState<boolean>(false);
   return (
-    <>{isValidToken ? <NewPasswordForm /> : <OTPValidatePasswordToken />}</>
+    <>
+      {isValidToken ? (
+        <NewPasswordForm />
+      ) : (
+        <OTPValidatePasswordToken setIsValidToken={setIsValidToken} />
+      )}
+    </>
   );
 };

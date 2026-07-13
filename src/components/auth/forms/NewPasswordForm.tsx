@@ -1,15 +1,23 @@
-import React from "react";
+import { resetPassword } from "@/actions/auth/new-password/reset-password";
 import { FormField } from "../inputs/FormField";
+import { useActionState } from "react";
 
 export const NewPasswordForm = () => {
+  const [state, dispatch, pending] = useActionState(resetPassword, {
+    errors: [],
+    fields: { password: "", password_confirmation: "" },
+    message: "",
+  });
+
   return (
-    <form className=" mt-14 space-y-5" noValidate>
+    <form className=" mt-14 space-y-5" noValidate action={dispatch}>
       <FormField
         label="Password"
         name="password"
         type="password"
         placeholder="Password de Registro"
-        errors={[]}
+        errors={state.errors}
+        defaultValue={state.fields.password}
       />
 
       <FormField
@@ -17,7 +25,8 @@ export const NewPasswordForm = () => {
         name="password_confirmation"
         type="password"
         placeholder="Confirma tu Password"
-        errors={[]}
+        errors={state.errors}
+        defaultValue={state.fields.password_confirmation}
       />
 
       <input

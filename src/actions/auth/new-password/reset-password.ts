@@ -4,6 +4,7 @@ import { ResetPasswordSchema } from "@/schemas/auth";
 import { NewPasswordState } from "@/types/auth/new-password";
 
 export const resetPassword = async (
+  token: string,
   prevState: NewPasswordState,
   formData: FormData,
 ) => {

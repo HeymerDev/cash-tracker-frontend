@@ -49,9 +49,4 @@ export const validateTokenPassword = async (
       message: "",
     };
   }
-
-  return {
-    errors: [],
-    message: "Token validado correctamente",
-  };
 };

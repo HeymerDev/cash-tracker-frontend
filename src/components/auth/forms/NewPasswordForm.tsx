@@ -6,7 +6,9 @@ interface Props {
   token: string;
 }
 export const NewPasswordForm = ({ token }: Props) => {
-  const [state, dispatch, pending] = useActionState(resetPassword, {
+  const resetPasswordAction = resetPassword.bind(null, token);
+
+  const [state, dispatch, pending] = useActionState(resetPasswordAction, {
     errors: [],
     fields: { password: "", password_confirmation: "" },
     message: "",

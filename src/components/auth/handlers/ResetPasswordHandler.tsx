@@ -10,7 +10,7 @@ export const ResetPasswordHandler = () => {
   return (
     <>
       {isValidToken ? (
-        <NewPasswordForm />
+        <NewPasswordForm token={token} />
       ) : (
         <OTPValidatePasswordToken
           setIsValidToken={setIsValidToken}

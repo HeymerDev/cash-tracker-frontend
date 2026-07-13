@@ -2,7 +2,10 @@ import { resetPassword } from "@/actions/auth/new-password/reset-password";
 import { FormField } from "../inputs/FormField";
 import { useActionState } from "react";
 
-export const NewPasswordForm = () => {
+interface Props {
+  token: string;
+}
+export const NewPasswordForm = ({ token }: Props) => {
   const [state, dispatch, pending] = useActionState(resetPassword, {
     errors: [],
     fields: { password: "", password_confirmation: "" },

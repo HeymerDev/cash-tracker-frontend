@@ -9,17 +9,20 @@ import {
   useActionState,
   useEffect,
   useMemo,
-  useState,
 } from "react";
 import { toast } from "sonner";
 
 interface Props {
   setIsValidToken: Dispatch<SetStateAction<boolean>>;
+  token: string;
+  setToken: Dispatch<SetStateAction<string>>;
 }
 
-export const OTPValidatePasswordToken = ({ setIsValidToken }: Props) => {
-  const [token, setToken] = useState<string>("");
-
+export const OTPValidatePasswordToken = ({
+  setIsValidToken,
+  token,
+  setToken,
+}: Props) => {
   const validateTokenAction = useMemo(
     () => validateTokenPassword.bind(null, token),
     [token],

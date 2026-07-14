@@ -1,4 +1,21 @@
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metaData: Metadata = {
+  title: "Panel Admin - CashTracker",
+  description: "Controla tus finanzas de manera eficiente",
+  authors: [{ name: "HeymerDev" }],
+  keywords: [
+    "CashTracker",
+    "Control de finanzas",
+    "Gestión financiera",
+    "Aplicación de finanzas",
+    "Seguimiento de gastos",
+    "Presupuesto personal",
+    "Finanzas personales",
+    "App de finanzas",
+  ],
+};
 
 const page = async () => {
   return (

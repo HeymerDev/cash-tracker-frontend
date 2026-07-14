@@ -1,3 +1,4 @@
+import { CreateBudgetForm } from "@/components/admin/forms/NewBudgetForm";
 import Link from "next/link";
 
 const CreateBudgetPage = () => {
@@ -21,7 +22,9 @@ const CreateBudgetPage = () => {
         </Link>
       </div>
 
-      <div className="p-10 mt-10  shadow-lg border "></div>
+      <div className="p-10 mt-10  shadow-lg">
+        <CreateBudgetForm />
+      </div>
     </>
   );
 };

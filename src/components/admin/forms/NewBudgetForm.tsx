@@ -2,14 +2,36 @@
 
 import { createBudget } from "@/actions/admin/budget/create-budget";
 import { FormField } from "@/components/auth/inputs/FormField";
-import { useActionState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
 
 export function CreateBudgetForm() {
+  const router = useRouter();
+
   const [state, dispatch, isPending] = useActionState(createBudget, {
     errors: [],
     message: "",
     fields: { name: "", amount: 0 },
   });
+
+  useEffect(() => {
+    if (!state.message) return;
+
+    if (state.status === 201) {
+      toast.success(state.message, {
+        onDismiss: () => {
+          router.push("/admin");
+        },
+        onAutoClose: () => {
+          router.push("/admin");
+        },
+      });
+    } else {
+      toast.error(state.message);
+    }
+  }, [state, router]);
+
   return (
     <form className="mt-10 space-y-3" noValidate action={dispatch}>
       <FormField

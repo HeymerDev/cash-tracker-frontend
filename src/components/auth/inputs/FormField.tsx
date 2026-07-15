@@ -10,7 +10,7 @@ type Props = {
   type?: string;
   placeholder: string;
   errors: RegisterError[];
-  defaultValue?: string;
+  defaultValue?: string | number;
 };
 
 export const FormField = ({

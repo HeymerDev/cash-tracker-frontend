@@ -1,10 +1,9 @@
+import { getToken } from "@/dal/token";
 import { BudgetsSchema } from "@/schemas/admin/budget";
 import { Budget } from "@/types/admin/budget";
-import { cookies } from "next/headers";
 
 export const getBudgets = async (): Promise<Budget[]> => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("CASHTRACKER_TOKEN")?.value;
+  const token = await getToken();
 
   try {
     const request = await fetch(`${process.env.API_URL}/budgets`, {

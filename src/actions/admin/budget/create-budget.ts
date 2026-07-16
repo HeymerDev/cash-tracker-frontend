@@ -1,16 +1,15 @@
 "use server";
 
+import { getToken } from "@/dal/token";
 import { CreateBudgetSchema } from "@/schemas/admin/budget";
 import { ResponseSchema } from "@/schemas/auth";
 import { CreateBudgetState } from "@/types/admin/budget";
-import { cookies } from "next/headers";
 
 export const createBudget = async (
   prevState: CreateBudgetState,
   formData: FormData,
 ): Promise<CreateBudgetState> => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("CASHTRACKER_TOKEN")?.value;
+  const token = await getToken();
 
   const name = formData.get("name") as string;
   const amount = parseFloat(formData.get("amount") as string);

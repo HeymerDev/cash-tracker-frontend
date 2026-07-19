@@ -1,5 +1,5 @@
 import { Budget } from "@/types/admin/budget";
-import { formatCurrency } from "@/utils";
+import { formatCurrency, formatDate } from "@/utils";
 import Link from "next/link";
 
 interface Props {
@@ -22,7 +22,10 @@ export const BudgetCard = ({ budget }: Props) => {
           <p className="text-xl font-bold text-amber-500">
             {formatCurrency(Number(budget.amount))}
           </p>
-          <p className="text-gray-500  text-sm"></p>
+          <p className="text-gray-500  text-sm">
+            Ultima Actualizacion:{" "}
+            <span className="font-bold">{formatDate(budget.updatedAt)}</span>
+          </p>
         </div>
       </div>
       <div className="flex shrink-0 items-center gap-x-6"></div>

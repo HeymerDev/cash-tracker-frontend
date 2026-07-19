@@ -10,3 +10,11 @@ export const formatCurrency = (amount: number) => {
     currency: "COP",
   }).format(amount);
 };
+
+export const formatDate = (date: string) => {
+  return new Date(date).toLocaleDateString("es-CO", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};

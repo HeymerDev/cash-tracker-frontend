@@ -1,6 +1,7 @@
 import { Budget } from "@/types/admin/budget";
 import { formatCurrency, formatDate } from "@/utils";
 import Link from "next/link";
+import BudgetMenu from "../navigations/BudgetMenu";
 
 interface Props {
   budget: Budget;
@@ -28,7 +29,9 @@ export const BudgetCard = ({ budget }: Props) => {
           </p>
         </div>
       </div>
-      <div className="flex shrink-0 items-center gap-x-6"></div>
+      <div className="flex shrink-0 items-center gap-x-6">
+        <BudgetMenu budgetId={budget.id} />
+      </div>
     </li>
   );
 };

@@ -18,4 +18,11 @@ export type CreateBudgetState = {
   status?: number;
 };
 
+export type EditBudgetState = {
+  errors: CreateBudgetError[];
+  fields: CreateBudgetFields;
+  message: string;
+  status?: number;
+};
+
 export type Budget = z.infer<typeof BudgetSchema>;

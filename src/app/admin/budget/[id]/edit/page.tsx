@@ -7,12 +7,7 @@ const EditBudgetPage = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
-      EditBudgetPage{" "}
-      {budget ? (
-        <pre>{JSON.stringify(budget, null, 2)}</pre>
-      ) : (
-        "Budeget no encontrado"
-      )}
+      EditBudgetPage <pre>{JSON.stringify(budget, null, 2)}</pre>
     </div>
   );
 };

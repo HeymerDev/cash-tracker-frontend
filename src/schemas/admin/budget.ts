@@ -9,6 +9,15 @@ export const CreateBudgetSchema = z.object({
     .min(1, { message: "Cantidad no válida" }),
 });
 
+export const EditBudgetSchema = z.object({
+  name: z
+    .string()
+    .min(1, { message: "El Nombre del presupuesto es obligatorio" }),
+  amount: z.coerce
+    .number({ message: "Cantidad no válida" })
+    .min(1, { message: "Cantidad no válida" }),
+});
+
 export const BudgetSchema = z.object({
   id: z.number(),
   name: z.string(),

@@ -3,13 +3,17 @@
 import { editBudget } from "@/actions/admin/budget/edit-budget";
 import { FormField } from "@/components/auth/inputs/FormField";
 import { Budget } from "@/types/admin/budget";
-import { useActionState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
 
 interface Props {
   budget: Budget;
 }
 
 export const EditBudgetForm = ({ budget }: Props) => {
+  const router = useRouter();
+
   const editBudgetAction = editBudget.bind(null, budget.id);
 
   const [state, dispatch, isPending] = useActionState(editBudgetAction, {
@@ -17,6 +21,17 @@ export const EditBudgetForm = ({ budget }: Props) => {
     message: "",
     fields: { amount: Number(budget.amount), name: budget.name },
   });
+
+  useEffect(() => {
+    if (!state.message) return;
+
+    if (state.status === 200) {
+      toast.success(state.message);
+      router.push(`/admin`);
+    } else {
+      toast.error(state.message);
+    }
+  }, [state, router, budget.id]);
 
   return (
     <form className="mt-10 space-y-3" noValidate action={dispatch}>

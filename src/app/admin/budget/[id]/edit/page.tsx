@@ -1,6 +1,17 @@
 import { getBudgetById } from "@/api/admin/budgets/getBudgetById";
 import { EditBudgetForm } from "@/components/admin/forms/EditBudgetForm";
+import Head from "next/head";
 import Link from "next/link";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const budget = await getBudgetById(id);
+  return { title: `Editar: ${budget.name}` };
+}
 
 const EditBudgetPage = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
@@ -9,6 +20,9 @@ const EditBudgetPage = async ({ params }: { params: { id: string } }) => {
 
   return (
     <>
+      <Head>
+        <title>{budget.name} - Editar Presupuesto</title>
+      </Head>
       <div className="flex flex-col-reverse md:flex-row md:justify-between items-center">
         <div className="w-full md:w-auto">
           <h1 className="font-black text-4xl text-purple-950 my-5">

@@ -4,6 +4,7 @@ import { getToken } from "@/dal/token";
 import { EditBudgetSchema } from "@/schemas/admin/budget";
 import { ResponseSchema } from "@/schemas/auth";
 import { Budget, EditBudgetState } from "@/types/admin/budget";
+import { revalidatePath } from "next/cache";
 
 export const editBudget = async (
   id: Budget["id"],
@@ -63,6 +64,8 @@ export const editBudget = async (
         status: request.status,
       };
     }
+
+    revalidatePath("/admin");
 
     return {
       errors: [],

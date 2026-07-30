@@ -6,6 +6,10 @@ export type CreateBudgetError = {
   message: string;
 };
 
+export type DeleteBudgetFields = {
+  password: string;
+};
+
 export type CreateBudgetFields = {
   name: string;
   amount: number;
@@ -21,6 +25,13 @@ export type CreateBudgetState = {
 export type EditBudgetState = {
   errors: CreateBudgetError[];
   fields: CreateBudgetFields;
+  message: string;
+  status?: number;
+};
+
+export type DeletBudgetState = {
+  errors: CreateBudgetError[];
+  fields: DeleteBudgetFields;
   message: string;
   status?: number;
 };

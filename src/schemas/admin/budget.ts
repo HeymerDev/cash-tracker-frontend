@@ -18,6 +18,10 @@ export const EditBudgetSchema = z.object({
     .min(1, { message: "Cantidad no válida" }),
 });
 
+export const PasswordValidationSchema = z
+  .string()
+  .min(1, { message: "El password es obligatorio para esta accion" });
+
 export const BudgetSchema = z.object({
   id: z.number(),
   name: z.string(),

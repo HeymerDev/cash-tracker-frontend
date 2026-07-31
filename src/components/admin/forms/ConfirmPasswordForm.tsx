@@ -1,13 +1,25 @@
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { DialogTitle } from "@headlessui/react";
 import { FormField } from "@/components/auth/inputs/FormField";
+import { useActionState } from "react";
+import { deleteBudget } from "@/actions/admin/budget/delte-budget";
 
 export default function ConfirmPasswordForm() {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const budgetId = searchParams.get("deleteBudgetId");
+  const budgetId = Number(searchParams.get("deleteBudgetId")!);
+
+  const deleteBudgetAction = deleteBudget.bind(null, budgetId);
+
+  const [state, dispatch] = useActionState(deleteBudgetAction, {
+    errors: [],
+    fields: {
+      password: "",
+    },
+    message: "",
+  });
 
   const closeModal = () => {
     const hideModal = new URLSearchParams(searchParams.toString());
@@ -27,13 +39,14 @@ export default function ConfirmPasswordForm() {
       <p className="text-gray-600 text-sm">
         (Un presupuesto eliminado y sus gastos no se pueden recuperar)
       </p>
-      <form className=" mt-14 space-y-5" noValidate>
+      <form className=" mt-14 space-y-5" noValidate action={dispatch}>
         <FormField
-          errors={[]}
+          errors={state.errors}
           name="password"
           placeholder="Password"
           label="Ingresa tu Password para eliminar"
           type="password"
+          defaultValue={state.fields.password}
         />
         <div className="grid grid-cols-2 gap-5">
           <input

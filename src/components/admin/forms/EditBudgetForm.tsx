@@ -44,7 +44,7 @@ export const EditBudgetForm = ({ budget }: Props) => {
       />
 
       <FormField
-        errors={[]}
+        errors={state.errors}
         name="amount"
         placeholder="Cantidad Presupuesto"
         label="Cantidad Presupuesto"

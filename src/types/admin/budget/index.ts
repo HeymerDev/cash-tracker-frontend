@@ -34,6 +34,7 @@ export type DeletBudgetState = {
   fields: DeleteBudgetFields;
   message: string;
   status?: number;
+  timestamp?: number;
 };
 
 export type Budget = z.infer<typeof BudgetSchema>;

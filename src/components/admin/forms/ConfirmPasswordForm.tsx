@@ -22,15 +22,24 @@ export default function ConfirmPasswordForm() {
     message: "",
   });
 
-  useEffect(() => {
-    if (!state.message) return;
+  const { message, status, timestamp } = state;
 
-    if (state.status === 200) {
-      toast.success(state.message);
+  useEffect(() => {
+    if (!message) return;
+
+    if (status === 200) {
+      toast.success(message);
+
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("deleteBudgetId");
+
+      const query = params.toString();
+
+      router.replace(query ? `${pathname}?${query}` : pathname);
     } else {
-      toast.error(state.message);
+      toast.error(message);
     }
-  }, [state.status, state.message]);
+  }, [timestamp, message, status, pathname, router, searchParams]);
 
   const closeModal = () => {
     const hideModal = new URLSearchParams(searchParams.toString());

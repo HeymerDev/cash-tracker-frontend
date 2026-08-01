@@ -56,6 +56,36 @@ export const deleteBudget = async (
         status: request.status,
       };
     }
+
+    const deleteRequest = await fetch(`${process.env.API_URL}/budgets/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const deleteJson = await deleteRequest.json();
+
+    const { message: deleteMessage } = ResponseSchema.parse(deleteJson);
+    if (!deleteRequest.ok) {
+      return {
+        errors: [],
+        fields: {
+          password: password,
+        },
+        message: deleteMessage,
+        status: deleteRequest.status,
+      };
+    }
+
+    return {
+      errors: [],
+      fields: {
+        password: "",
+      },
+      message: deleteMessage,
+      status: deleteRequest.status,
+    };
   } catch (error) {
     console.error("Error checking password:", error);
     return {
@@ -66,12 +96,4 @@ export const deleteBudget = async (
       message: "An error occurred while checking the password.",
     };
   }
-
-  return {
-    errors: [],
-    fields: {
-      password: "",
-    },
-    message: "",
-  };
 };

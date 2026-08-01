@@ -4,6 +4,7 @@ import { getToken } from "@/dal/token";
 import { PasswordValidationSchema } from "@/schemas/admin/budget";
 import { ResponseSchema } from "@/schemas/auth";
 import { Budget, DeletBudgetState } from "@/types/admin/budget";
+import { revalidatePath } from "next/cache";
 
 export const deleteBudget = async (
   id: Budget["id"],
@@ -54,6 +55,7 @@ export const deleteBudget = async (
         },
         message: message,
         status: request.status,
+        timestamp: Date.now(),
       };
     }
 
@@ -75,8 +77,11 @@ export const deleteBudget = async (
         },
         message: deleteMessage,
         status: deleteRequest.status,
+        timestamp: Date.now(),
       };
     }
+
+    revalidatePath("/admin/budgets");
 
     return {
       errors: [],
@@ -85,6 +90,7 @@ export const deleteBudget = async (
       },
       message: deleteMessage,
       status: deleteRequest.status,
+      timestamp: Date.now(),
     };
   } catch (error) {
     console.error("Error checking password:", error);

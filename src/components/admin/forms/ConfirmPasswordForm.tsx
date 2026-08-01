@@ -1,8 +1,9 @@
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { DialogTitle } from "@headlessui/react";
 import { FormField } from "@/components/auth/inputs/FormField";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { deleteBudget } from "@/actions/admin/budget/delte-budget";
+import { toast } from "sonner";
 
 export default function ConfirmPasswordForm() {
   const pathname = usePathname();
@@ -20,6 +21,16 @@ export default function ConfirmPasswordForm() {
     },
     message: "",
   });
+
+  useEffect(() => {
+    if (!state.message) return;
+
+    if (state.status === 200) {
+      toast.success(state.message);
+    } else {
+      toast.error(state.message);
+    }
+  }, [state.status, state.message]);
 
   const closeModal = () => {
     const hideModal = new URLSearchParams(searchParams.toString());

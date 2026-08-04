@@ -1,5 +1,15 @@
 import { getBudgetById } from "@/api/admin/budgets/getBudgetById";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const budget = await getBudgetById(id);
+  return { title: `${budget.name}` };
+}
+
 const BudgetPage = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
 

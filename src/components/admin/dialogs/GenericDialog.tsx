@@ -8,12 +8,30 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 
+import { NewExpenseForm } from "../forms/NewExpenseForm";
+import { EditExpenseForm } from "../forms/EditExpenseForm";
+import { DeleteExpenseForm } from "../forms/DeleteExpenseForm";
+
+const componentsMap = {
+  new: NewExpenseForm,
+  edit: EditExpenseForm,
+  delete: DeleteExpenseForm,
+};
+
 export const GenericDialog = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const show = searchParams.get("showModal") === "true";
+
+  const addExpense = searchParams.get("addExpense");
+
+  const getComponent = () => {
+    if (addExpense) return "new";
+  };
+
+  const Component = componentsMap[getComponent() as keyof typeof componentsMap];
 
   const closeModal = () => {
     const hideModal = new URLSearchParams(searchParams.toString());
@@ -50,7 +68,9 @@ export const GenericDialog = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <DialogPanel className="w-full max-w-5xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16"></DialogPanel>
+                <DialogPanel className="w-full max-w-5xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16">
+                  {Component && <Component />}
+                </DialogPanel>
               </TransitionChild>
             </div>
           </div>

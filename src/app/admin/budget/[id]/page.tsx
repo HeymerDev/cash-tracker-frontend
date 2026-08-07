@@ -1,5 +1,6 @@
 import { getBudgetById } from "@/api/admin/budgets/getBudgetById";
 import { AddExpenseButton } from "@/components/admin/buttons/AddExpenseButton";
+import { GenericDialog } from "@/components/admin/dialogs/GenericDialog";
 
 export async function generateMetadata({
   params,
@@ -27,6 +28,8 @@ const BudgetPage = async ({ params }: { params: { id: string } }) => {
         </div>
         <AddExpenseButton />
       </div>
+
+      <GenericDialog />
     </>
   );
 };

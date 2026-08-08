@@ -1,7 +1,23 @@
+import { createExpense } from "@/actions/admin/expense/create-expense";
 import { FormField } from "@/components/auth/inputs/FormField";
 import { DialogTitle } from "@headlessui/react";
+import { useParams } from "next/navigation";
+import { useActionState } from "react";
 
 export const NewExpenseForm = () => {
+  const { id } = useParams();
+
+  const createExpenseAction = createExpense.bind(null, id as string);
+
+  const [state, dispatch, pending] = useActionState(createExpenseAction, {
+    errors: [],
+    fields: {
+      name: "",
+      amount: 0,
+    },
+    message: "",
+  });
+
   return (
     <>
       <DialogTitle as="h3" className="font-black text-4xl text-purple-950 my-5">
@@ -15,25 +31,29 @@ export const NewExpenseForm = () => {
       <form
         className="bg-gray-100 shadow-lg rounded-lg p-10 mt-10 grid gap-9"
         noValidate
+        action={dispatch}
       >
         <FormField
-          errors={[]}
+          errors={state.errors}
           name="name"
-          placeholder="Nombre del gasto"
+          placeholder={"Nombre del gasto"}
           label="Nombre del gasto"
+          defaultValue={state.fields.name}
         />
 
         <FormField
-          errors={[]}
+          errors={state.errors}
           name="amount"
-          placeholder="Cantidad Gastada"
+          placeholder={"Cantidad Gastada"}
           label="Cantidad Gastada"
           type="number"
+          defaultValue={state.fields.amount}
         />
         <input
           type="submit"
           className="bg-amber-500 w-full p-3 text-white uppercase font-bold hover:bg-amber-600 cursor-pointer transition-colors"
-          value="Registrar Gasto"
+          value={pending ? "Creando Gasto..." : "Crear Gasto"}
+          disabled={pending}
         />
       </form>
     </>

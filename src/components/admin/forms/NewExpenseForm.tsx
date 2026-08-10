@@ -2,7 +2,8 @@ import { createExpense } from "@/actions/admin/expense/create-expense";
 import { FormField } from "@/components/auth/inputs/FormField";
 import { DialogTitle } from "@headlessui/react";
 import { useParams } from "next/navigation";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
 
 export const NewExpenseForm = () => {
   const { id } = useParams();
@@ -17,6 +18,16 @@ export const NewExpenseForm = () => {
     },
     message: "",
   });
+
+  useEffect(() => {
+    if (!state.message) return;
+
+    if (state.status === 201) {
+      toast.success(state.message);
+    } else {
+      toast.error(state.message);
+    }
+  }, [state]);
 
   return (
     <>

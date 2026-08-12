@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
-export const NewExpenseForm = () => {
+export const NewExpenseForm = ({ closeModal }: { closeModal: () => void }) => {
   const { id } = useParams();
 
   const createExpenseAction = createExpense.bind(null, id as string);
@@ -24,6 +24,7 @@ export const NewExpenseForm = () => {
 
     if (state.status === 201) {
       toast.success(state.message);
+      closeModal();
     } else {
       toast.error(state.message);
     }

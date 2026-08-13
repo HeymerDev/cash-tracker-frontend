@@ -14,6 +14,6 @@ export const ExpenseSchema = z.object({
     .number({ message: "Cantidad no válida" })
     .min(1, { message: "Cantidad no válida" }),
   budgetId: z.number().positive(),
-  createdAt: z.string().datetime(),
-  updatedAt: z.string().datetime(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ExpenseSchema } from "./expense";
 
 export const CreateBudgetSchema = z.object({
   name: z
@@ -29,6 +30,7 @@ export const BudgetSchema = z.object({
   userId: z.number(),
   updatedAt: z.string(),
   createdAt: z.string(),
+  expenses: z.array(ExpenseSchema),
 });
 
 export const BudgetsSchema = z.array(BudgetSchema);

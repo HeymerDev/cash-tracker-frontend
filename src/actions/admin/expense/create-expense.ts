@@ -4,6 +4,7 @@ import { getToken } from "@/dal/token";
 import { CreateExpenseSchema } from "@/schemas/admin/expense";
 import { ResponseSchema } from "@/schemas/auth";
 import { CreateExpenseState } from "@/types/admin/expense";
+import { revalidatePath } from "next/cache";
 
 export const createExpense = async (
   budgetId: string,
@@ -67,6 +68,8 @@ export const createExpense = async (
         status: request.status,
       };
     }
+
+    revalidatePath(`/admin/budget/${budgetId}`);
 
     return {
       errors: [],

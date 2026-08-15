@@ -33,4 +33,4 @@ export const BudgetSchema = z.object({
   expenses: z.array(ExpenseSchema),
 });
 
-export const BudgetsSchema = z.array(BudgetSchema);
+export const BudgetsSchema = z.array(BudgetSchema.omit({ expenses: true }));

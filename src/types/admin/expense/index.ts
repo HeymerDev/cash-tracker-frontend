@@ -1,3 +1,6 @@
+import { ExpenseSchema } from "@/schemas/admin/expense";
+import { z } from "zod";
+
 export type CreateExpenseError = {
   path: string;
   message: string;
@@ -14,3 +17,5 @@ export type CreateExpenseState = {
   message: string;
   status?: number;
 };
+
+export type Expense = z.infer<typeof ExpenseSchema>;

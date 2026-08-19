@@ -1,5 +1,6 @@
 import { Expense } from "@/types/admin/expense";
 import { formatCurrency, formatDate } from "@/utils";
+import ExpenseMenu from "../navigations/ExpenseMenu";
 
 interface Props {
   expense: Expense;
@@ -20,6 +21,7 @@ export const ExpenseCard = ({ expense }: Props) => {
           </p>
         </div>
       </div>
+      <ExpenseMenu expenseId={expense.id} />
     </li>
   );
 };

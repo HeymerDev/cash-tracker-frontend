@@ -18,4 +18,11 @@ export type CreateExpenseState = {
   status?: number;
 };
 
+export type EditExpenseState = {
+  errors: CreateExpenseError[];
+  fields: CreateExpenseFields;
+  message: string;
+  status?: number;
+};
+
 export type Expense = z.infer<typeof ExpenseSchema>;

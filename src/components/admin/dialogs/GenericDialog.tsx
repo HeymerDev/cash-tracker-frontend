@@ -27,10 +27,12 @@ export const GenericDialog = () => {
 
   const addExpense = searchParams.get("addExpense");
   const expenseId = searchParams.get("expenseId");
+  const deleteExpenseId = searchParams.get("deleteExpenseId");
 
   const getComponent = () => {
     if (addExpense) return "new";
     if (expenseId) return "edit";
+    if (deleteExpenseId) return "delete";
   };
 
   const Component = componentsMap[getComponent() as keyof typeof componentsMap];

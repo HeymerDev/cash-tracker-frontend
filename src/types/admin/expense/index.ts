@@ -25,4 +25,9 @@ export type EditExpenseState = {
   status?: number;
 };
 
+export type DeleteExpenseState = {
+  message: string;
+  status?: number;
+};
+
 export type Expense = z.infer<typeof ExpenseSchema>;

@@ -27,7 +27,7 @@ export const EditBudgetForm = ({ budget }: Props) => {
 
     if (state.status === 200) {
       toast.success(state.message);
-      router.push(`/admin`);
+      router.replace(`/admin`);
     } else {
       toast.error(state.message);
     }

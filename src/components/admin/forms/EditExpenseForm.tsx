@@ -36,7 +36,7 @@ export function EditExpenseForm() {
 
     if (state.status === 200) {
       toast.success(state.message);
-      router.push(`/admin/budget/${budgetId}`);
+      router.replace(`/admin/budget/${budgetId}`);
     } else {
       toast.error(state.message);
     }

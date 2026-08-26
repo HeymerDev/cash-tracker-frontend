@@ -1,5 +1,13 @@
-import { useParams, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { DialogTitle } from "@headlessui/react";
+import { deleteExpense } from "@/actions/admin/expense/delete-expense";
+import { startTransition, useActionState, useEffect } from "react";
+import { toast } from "sonner";
 
 type DeleteExpenseForm = {
   closeModal: () => void;
@@ -9,6 +17,40 @@ export function DeleteExpenseForm({ closeModal }: DeleteExpenseForm) {
   const { id: budgetId } = useParams();
   const searchParams = useSearchParams();
   const expenseId = searchParams.get("deleteExpenseId")!;
+
+  const router = useRouter();
+
+  const deleteExpenseAction = deleteExpense.bind(
+    null,
+    Number(budgetId),
+    Number(expenseId),
+  );
+
+  const [state, dispatch, pending] = useActionState(deleteExpenseAction, {
+    message: "",
+  });
+
+  const handleClick = () => {
+    startTransition(() => {
+      dispatch();
+    });
+  };
+  const { message, status } = state;
+
+  useEffect(() => {
+    if (!message) return;
+
+    if (status === 200) {
+      toast.success(message);
+
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("deleteBudgetId");
+
+      router.replace(`/admin/budget/${budgetId}`);
+    } else {
+      toast.error(message);
+    }
+  }, [message, status, router, searchParams, budgetId]);
 
   return (
     <>
@@ -30,10 +72,11 @@ export function DeleteExpenseForm({ closeModal }: DeleteExpenseForm) {
           Cancelar
         </button>
         <button
+          onClick={() => handleClick()}
           type="button"
           className="bg-red-500 w-full p-3 text-white uppercase font-bold hover:bg-red-600 cursor-pointer transition-colors"
         >
-          Eliminar
+          {pending ? "Eliminando Gasto" : "Eliminar Gasto"}
         </button>
       </div>
     </>

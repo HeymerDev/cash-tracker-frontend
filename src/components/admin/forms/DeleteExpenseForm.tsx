@@ -1,9 +1,4 @@
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { DialogTitle } from "@headlessui/react";
 import { deleteExpense } from "@/actions/admin/expense/delete-expense";
 import { startTransition, useActionState, useEffect } from "react";
@@ -43,14 +38,11 @@ export function DeleteExpenseForm({ closeModal }: DeleteExpenseForm) {
     if (status === 200) {
       toast.success(message);
 
-      const params = new URLSearchParams(searchParams.toString());
-      params.delete("deleteBudgetId");
-
-      router.replace(`/admin/budget/${budgetId}`);
+      closeModal();
     } else {
       toast.error(message);
     }
-  }, [message, status, router, searchParams, budgetId]);
+  }, [message, status, closeModal]);
 
   return (
     <>

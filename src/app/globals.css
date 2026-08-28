@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/forms";
 
 @utility bg-auth {
   background-image: url("/grafico.svg");

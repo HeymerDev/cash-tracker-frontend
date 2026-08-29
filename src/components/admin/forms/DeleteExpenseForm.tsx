@@ -13,8 +13,6 @@ export function DeleteExpenseForm({ closeModal }: DeleteExpenseForm) {
   const searchParams = useSearchParams();
   const expenseId = searchParams.get("deleteExpenseId")!;
 
-  const router = useRouter();
-
   const deleteExpenseAction = deleteExpense.bind(
     null,
     Number(budgetId),

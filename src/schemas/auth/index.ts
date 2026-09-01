@@ -48,6 +48,13 @@ export const ResetPasswordSchema = z
     path: ["password_confirmation"],
   });
 
+export const UpdatePasswordSchema = z.object({
+  password: z
+    .string()
+    .min(8, { message: "El Password debe ser de al menos 8 caracteres" }),
+  current_password: z.string(),
+});
+
 export const UserSchema = z.object({
   id: z.number(),
   name: z.string(),

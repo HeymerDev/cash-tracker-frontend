@@ -12,9 +12,21 @@ export type NewPasswordFields = {
   password_confirmation: string;
 };
 
+export type UpdatePasswordFields = {
+  password: string;
+  current_password: string;
+};
+
 export type NewPasswordState = {
   errors: NewPasswordError[];
   fields: NewPasswordFields;
+  message?: string;
+  status?: number;
+};
+
+export type UpdatePasswordState = {
+  errors: NewPasswordError[];
+  fields: UpdatePasswordFields;
   message?: string;
   status?: number;
 };

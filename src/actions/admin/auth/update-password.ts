@@ -11,10 +11,12 @@ export const updatePassword = async (
   const token = await getToken();
   const password = formData.get("password") as string;
   const current_password = formData.get("current_password") as string;
+  const password_confirmation = formData.get("password_confirmation") as string;
 
   const updatePassword = UpdatePasswordSchema.safeParse({
     password,
     current_password,
+    password_confirmation,
   });
 
   if (!updatePassword.success) {
@@ -26,6 +28,7 @@ export const updatePassword = async (
       fields: {
         password,
         current_password,
+        password_confirmation,
       },
     };
   }
@@ -55,6 +58,7 @@ export const updatePassword = async (
         fields: {
           password,
           current_password,
+          password_confirmation,
         },
         message: message,
         status: request.status,
@@ -63,7 +67,7 @@ export const updatePassword = async (
 
     return {
       errors: [],
-      fields: { password: "", current_password: "" },
+      fields: { password: "", current_password: "", password_confirmation: "" },
       message: message,
       status: request.status,
     };
@@ -74,6 +78,7 @@ export const updatePassword = async (
       fields: {
         password,
         current_password,
+        password_confirmation,
       },
       message: "Error interno del servidor",
       status: 500,

@@ -15,6 +15,7 @@ export type NewPasswordFields = {
 export type UpdatePasswordFields = {
   password: string;
   current_password: string;
+  password_confirmation: string;
 };
 
 export type NewPasswordState = {

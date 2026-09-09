@@ -13,7 +13,11 @@ export async function generateMetadata({
   return { title: `Editar: ${budget.name}` };
 }
 
-const EditBudgetPage = async ({ params }: { params: { id: string } }) => {
+const EditBudgetPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
   const { id } = await params;
 
   const budget = await getBudgetById(id);

@@ -1,4 +1,3 @@
-import { Logo } from "@/components/logo/Logo";
 import Link from "next/link";
 
 const features = [

@@ -5,7 +5,7 @@ import { ResponseSchema } from "@/schemas/auth";
 
 export async function GET(
   request: Request,
-  { params }: { params: { budgetId: string; expenseId: string } },
+  { params }: { params: Promise<{ budgetId: string; expenseId: string }> },
 ) {
   await verifySession();
   const token = await getToken();

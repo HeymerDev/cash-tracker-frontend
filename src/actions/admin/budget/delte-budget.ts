@@ -81,7 +81,7 @@ export const deleteBudget = async (
       };
     }
 
-    revalidatePath("/admin/budgets");
+    revalidatePath("/admin");
 
     return {
       errors: [],

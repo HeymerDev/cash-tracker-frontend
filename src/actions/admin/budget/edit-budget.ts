@@ -68,6 +68,7 @@ export const editBudget = cache(
       }
 
       revalidatePath("/admin");
+      revalidatePath(`/admin/budget/${id}`);
 
       return {
         errors: [],

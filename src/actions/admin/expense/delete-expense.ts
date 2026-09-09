@@ -34,7 +34,7 @@ export const deleteExpense = async (
       };
     }
 
-    revalidatePath("/admin/budgets");
+    revalidatePath(`/admin/budget/${budgetId}`);
 
     return {
       message: deleteMessage,

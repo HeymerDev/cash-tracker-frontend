@@ -72,7 +72,7 @@ export const editExpense = cache(
         };
       }
 
-      revalidatePath("/admin");
+      revalidatePath(`/admin/budget/${budgetId}`);
 
       return {
         errors: [],

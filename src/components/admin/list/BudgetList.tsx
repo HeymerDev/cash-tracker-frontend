@@ -1,10 +1,10 @@
-import { Budget } from "@/types/admin/budget";
+import { BudgetSummary } from "@/types/admin/budget";
 import { BudgetCard } from "../cards/BudgetCard";
 import Link from "next/link";
 import DeleteBudgetModal from "../dialogs/DeleteBudgetDialog";
 
 interface Props {
-  budgets: Budget[];
+  budgets: BudgetSummary[];
 }
 
 export const BudgetList = ({ budgets }: Props) => {
@@ -13,7 +13,7 @@ export const BudgetList = ({ budgets }: Props) => {
       {budgets.length ? (
         <>
           <ul role="list" className="divide-y divide-gray-300 shadow-lg mt-10 ">
-            {budgets.map((budget: Budget) => (
+            {budgets.map((budget: BudgetSummary) => (
               <BudgetCard key={budget.id} budget={budget} />
             ))}
           </ul>

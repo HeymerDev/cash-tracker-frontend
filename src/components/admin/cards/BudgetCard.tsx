@@ -1,10 +1,10 @@
-import { Budget } from "@/types/admin/budget";
+import { BudgetSummary } from "@/types/admin/budget";
 import { formatCurrency, formatDate } from "@/utils";
 import Link from "next/link";
 import BudgetMenu from "../navigations/BudgetMenu";
 
 interface Props {
-  budget: Budget;
+  budget: BudgetSummary;
 }
 
 export const BudgetCard = ({ budget }: Props) => {

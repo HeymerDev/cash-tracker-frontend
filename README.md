@@ -605,8 +605,17 @@ Zod cumple dos roles: validar los formularios **y** validar las respuestas de la
 Los tipos de `src/types/` se derivan de los esquemas para no duplicar definiciones:
 
 ```ts
+// Presupuesto completo, con sus gastos (detalle: GET /budgets/:id)
 export type Budget = z.infer<typeof BudgetSchema>;
+
+// Presupuesto del listado, SIN gastos (GET /budgets)
+export type BudgetSummary = z.infer<typeof BudgetsSchema>[number];
 ```
+
+> **Importante:** el backend no devuelve `expenses` en el listado, por eso existen dos
+> tipos. Usa `BudgetSummary` en todo lo que consuma `getBudgets()` (`BudgetList`,
+> `BudgetCard`) y `Budget` en lo que consuma `getBudgetById()` (`EditBudgetForm`, la
+> página de detalle). Confundirlos rompe `pnpm build`, que ejecuta el chequeo de tipos.
 
 ---
 

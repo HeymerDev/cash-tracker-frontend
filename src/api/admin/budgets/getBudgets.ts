@@ -1,8 +1,8 @@
 import { getToken } from "@/dal/token";
 import { BudgetsSchema } from "@/schemas/admin/budget";
-import { Budget } from "@/types/admin/budget";
+import { BudgetSummary } from "@/types/admin/budget";
 
-export const getBudgets = async (): Promise<Budget[]> => {
+export const getBudgets = async (): Promise<BudgetSummary[]> => {
   const token = await getToken();
 
   try {
@@ -15,7 +15,7 @@ export const getBudgets = async (): Promise<Budget[]> => {
 
     const json = await request.json();
 
-    const budgets: Budget[] = BudgetsSchema.parse(json);
+    const budgets: BudgetSummary[] = BudgetsSchema.parse(json);
 
     return budgets;
   } catch (error) {

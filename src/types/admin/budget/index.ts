@@ -1,4 +1,4 @@
-import { BudgetSchema } from "@/schemas/admin/budget";
+import { BudgetSchema, BudgetsSchema } from "@/schemas/admin/budget";
 import { z } from "zod";
 
 export type CreateBudgetError = {
@@ -38,3 +38,9 @@ export type DeletBudgetState = {
 };
 
 export type Budget = z.infer<typeof BudgetSchema>;
+
+/**
+ * Presupuesto tal y como lo devuelve el listado (GET /budgets): sin `expenses`.
+ * El detalle (GET /budgets/:id) sí los incluye y usa el tipo `Budget`.
+ */
+export type BudgetSummary = z.infer<typeof BudgetsSchema>[number];
